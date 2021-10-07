@@ -2,7 +2,7 @@ import { colors, typhography } from "../theme";
 const BASE ={
      fontFamily: typhography.primary,
      fontSize: 14,
-     color: colors.white
+     color: colors.white,
 }
 const BASE_BOLD ={
     fontFamily: typhography.primaryBold,

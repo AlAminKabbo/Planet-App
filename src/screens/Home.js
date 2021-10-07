@@ -1,7 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Pressable, StatusBar, FlatList, StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import  Text from '../components/text';
-import { colors } from '../theme';
+import { colors, spacing } from '../theme';
+import PlanetHeader from './planet-header';
 
 export const PLANET_LIST = [
     {
@@ -109,12 +111,36 @@ export const PLANET_LIST = [
     surfaceImage: require('../../assets/geology-neptune.png')
     },
     ];
-    
+  
 
+const styles = StyleSheet.create({
+    item:{
+        flexDirection: 'row',
+        alignItems: 'center',
+    }
+})
 export default function HomeScreen() {
+    const renderItem = ({item,index}) => {
+        const {name, color} = item
+        return(
+            <View style={styles.item}>
+                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: color}}/>
+                        <Text>{name}</Text>
+                </View>
+            </View>
+        )
+    }
     return (
         <View style={{backgroundColor:colors.black,flex:1}}>
-            <Text>Home  Screen</Text>
+            <PlanetHeader/>
+            <FlatList
+                data={PLANET_LIST}
+                renderItem={renderItem}
+                keyExtractor={(item,index) => item.name}
+                contentContainerStyle={{ padding: spacing[2]}}
+            />
+            <StatusBar barSyle="light-content"/>
         </View>
     )
 }

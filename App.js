@@ -26,6 +26,7 @@ export default function App() {
         <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="Details" component={Details} options={{headerShown: false}}/>
+        
         </Stack.Navigator>
       </NavigationContainer>
     )
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
     alignItems: 'center',
+    
     justifyContent: 'center',
   },
 });
