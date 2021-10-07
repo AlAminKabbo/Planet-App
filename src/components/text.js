@@ -1,14 +1,12 @@
 import  React from 'react';
-import {View, Text as RNText} from 'react-native';
-import {margeAll, flatten} from 'ramda';
+import { Text as RNText} from 'react-native';
 import { presets } from './text.preset';
-const Text = ({chidren, preset = 'default', style}) => {
-    const styles = margeAll(
-        flatten([presets[preset] || presets.default, customStyle])
-    )
+
+const Text = ({children, preset = 'default', style}) => {
+    const testStyle = StyleSheet.compose(presets[preset],style)
     return(
-        <RNText style={styles}>
-            {chidren}
+        <RNText style={teststyles}>
+            {children}
         </RNText>
     )
 }
