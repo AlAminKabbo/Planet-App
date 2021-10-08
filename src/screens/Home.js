@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable, StatusBar, FlatList, StyleSheet} from 'react-native';
+import { View, Pressable, StatusBar, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import  Text from '../components/text';
 import { colors, spacing } from '../theme';
@@ -113,27 +113,28 @@ export const PLANET_LIST = [
     },
     ];
   
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
     const renderItem = ({item,index}) => {
         const {name, color} = item
         return(
-            <View style={styles.item}>
-                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Details', {planet: item})}style={styles.item}>
+                <View style={styles.planet}>
                     <View style={[ styles.circle, {backgroundColor: color}]}/>
                         <Text style={styles.name}>{name}</Text>
                 </View>
                 <AntDesign name="right" size={24} color={colors.grey} />
-            </View>
+            </TouchableOpacity>
         )
     }
     return (
-        <View style={{backgroundColor:colors.black,flex:1}}>
+        <View style={styles.body}>
             <PlanetHeader/>
             <FlatList
                 data={PLANET_LIST}
                 renderItem={renderItem}
                 keyExtractor={(item,index) => item.name}
                 contentContainerStyle={{ padding: spacing[3]}}
+                //ItemSeparatorComponent={()=>{<View style={{height: 0.5, backgroundColor: colors.grey}}/>}}
             />
             <StatusBar barSyle="light-content"/>
         </View>
@@ -156,5 +157,13 @@ const styles = StyleSheet.create({
     name:{
         marginLeft: spacing[2],
         textTransform: 'uppercase',
+    },
+    body:{
+        backgroundColor:colors.black,
+        flex:1,
+    },
+    planet:{
+        flexDirection: 'row', 
+        alignItems: 'center',
     }
 })
