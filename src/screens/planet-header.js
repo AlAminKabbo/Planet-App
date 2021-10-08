@@ -5,7 +5,7 @@ import Text from '../components/text'
 
 export default function PlanetHeader() {
     return (
-        <View style={{paddingLeft: spacing[6], paddingVertical: spacing[4]}}>
+        <View style={{borderBottomWidth: 1,borderBottomColor: colors.grey,paddingLeft: spacing[3], paddingVertical: spacing[2]}}>
             <Text preset="h2">
                     THE PLANETS
             </Text>

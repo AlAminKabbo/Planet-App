@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import  Text from '../components/text';
 import { colors, spacing } from '../theme';
 import PlanetHeader from './planet-header';
+import { AntDesign } from '@expo/vector-icons';
 
 export const PLANET_LIST = [
     {
@@ -112,22 +113,16 @@ export const PLANET_LIST = [
     },
     ];
   
-
-const styles = StyleSheet.create({
-    item:{
-        flexDirection: 'row',
-        alignItems: 'center',
-    }
-})
 export default function HomeScreen() {
     const renderItem = ({item,index}) => {
         const {name, color} = item
         return(
             <View style={styles.item}>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                    <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: color}}/>
-                        <Text>{name}</Text>
+                    <View style={[ styles.circle, {backgroundColor: color}]}/>
+                        <Text style={styles.name}>{name}</Text>
                 </View>
+                <AntDesign name="right" size={24} color={colors.grey} />
             </View>
         )
     }
@@ -138,9 +133,28 @@ export default function HomeScreen() {
                 data={PLANET_LIST}
                 renderItem={renderItem}
                 keyExtractor={(item,index) => item.name}
-                contentContainerStyle={{ padding: spacing[2]}}
+                contentContainerStyle={{ padding: spacing[3]}}
             />
             <StatusBar barSyle="light-content"/>
         </View>
     )
 }
+const styles = StyleSheet.create({
+    item:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: spacing[2],
+        borderBottomWidth: 1,
+        borderBottomColor: colors.grey,
+        justifyContent: 'space-between',
+    },
+    circle:{
+        width: 20, 
+        height: 20, 
+        borderRadius: 10,
+    },
+    name:{
+        marginLeft: spacing[2],
+        textTransform: 'uppercase',
+    }
+})
