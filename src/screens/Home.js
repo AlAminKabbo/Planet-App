@@ -212,5 +212,5 @@ const styles = StyleSheet.create({
     filterView:{
         alignSelf: "flex-end",
         padding: spacing[3],
-    }
+    },
 })
