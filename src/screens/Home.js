@@ -143,7 +143,7 @@ export default function HomeScreen({ navigation }) {
             <TextInput
                 placeholder = "Search planet by name"
                 placeholderTextColor = {colors.white}
-                onChangeText={(text)=>{searchFilter}}
+                onChangeText={(text)=>searchFilter(text)}
                 autoCorrect = {false}
                 style = {styles.searchBox}
             />
@@ -155,6 +155,11 @@ export default function HomeScreen({ navigation }) {
                 contentContainerStyle={{ padding: spacing[3]}}
                 //ItemSeparatorComponent={()=>{<View style={{height: 0.5, backgroundColor: colors.grey}}/>}}
             />
+            <Pressable style = {styles.filterView}>
+                <View style = {styles.filterButton}>
+                    <AntDesign name="filter" size={24} color={colors.black} />
+                </View>
+            </Pressable>
             <StatusBar barSyle="light-content"/>
         </View>
     )
@@ -195,5 +200,17 @@ const styles = StyleSheet.create({
     box:{
      marginHorizontal: spacing[2],
      marginTop: spacing[2],
+    },
+    filterButton:{
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: colors.white,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    filterView:{
+        alignSelf: "flex-end",
+        padding: spacing[3],
     }
 })
