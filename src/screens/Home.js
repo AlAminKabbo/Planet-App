@@ -157,7 +157,7 @@ export default function HomeScreen({ navigation }) {
             />
             <Pressable style = {styles.filterView}>
                 <View style = {styles.filterButton}>
-                    <AntDesign name="filter" size={24} color={colors.black} />
+                    <AntDesign name="filter" size={24} color={colors.black}/>
                 </View>
             </Pressable>
             <StatusBar barSyle="light-content"/>
