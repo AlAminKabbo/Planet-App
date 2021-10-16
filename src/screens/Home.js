@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { View, Pressable, StatusBar, FlatList, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import { View, Pressable, StatusBar, FlatList, StyleSheet, TouchableOpacity, TextInput, useWindowDimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import  Text from '../components/text';
 import { colors, spacing } from '../theme';
 import PlanetHeader from './planet-header';
 import { AntDesign } from '@expo/vector-icons';
+import Modal from 'react-native-modal'
 
 export const PLANET_LIST = [
     {
@@ -112,11 +113,34 @@ export const PLANET_LIST = [
     surfaceImage: require('../../assets/8.png')
     },
     ];
-  
+
+const  FilterModal = ({ visible, colseModal }) => {
+const { height, width } = useWindowDimensions();
+
+    return(
+    <Modal 
+    isVisible ={visible}
+    swipeDirection= {['down']}
+    style = {{justifyContent: 'flex-end'}}
+    onBackdropPress = {colseModal}
+    >
+    
+    <View
+     style = {{ backgroundColor: colors.darkGrey, height: height/2, borderRadius: 30, margin: spacing[2]}}
+    >
+
+    </View>
+
+    </Modal>
+    )
+}
 export default function HomeScreen({ navigation }) {
-    const [planetList, setPlanetList] = useState(PLANET_LIST)
+    const [planetList, setPlanetList] = useState(PLANET_LIST);
+    const [visible, setVisiable] = useState(false);
+
     const renderItem = ({item,index}) => {
         const {name, color} = item
+
         return(
             <TouchableOpacity onPress={()=>navigation.navigate('Details', {planet: item})}style={styles.item}>
                 <View style={styles.planet}>
@@ -155,11 +179,15 @@ export default function HomeScreen({ navigation }) {
                 contentContainerStyle={{ padding: spacing[3]}}
                 //ItemSeparatorComponent={()=>{<View style={{height: 0.5, backgroundColor: colors.grey}}/>}}
             />
-            <Pressable style = {styles.filterView}>
+            <Pressable onPress={()=> setVisiable(true)} style = {styles.filterView}>
                 <View style = {styles.filterButton}>
                     <AntDesign name="filter" size={24} color={colors.black}/>
                 </View>
             </Pressable>
+            <FilterModal
+                visible = {visible}
+                colseModal ={()=> setVisiable(false)}
+            />
             <StatusBar barSyle="light-content"/>
         </View>
     )
