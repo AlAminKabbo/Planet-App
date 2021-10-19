@@ -173,14 +173,14 @@ const  FilterModal = ({ visible, colseModal }) => {
                     max={15000}
                     containerStyle={{marginLeft: spacing[2]}}
                 />
-                <View style={{flexBasis: "row"}}>
-                    <Pressable style = {styles.modalButton}>
+                <View>
+                    <TouchableOpacity style = {styles.modalButton}>
                     <Text>FILTER</Text>
-                    </Pressable>
+                    </TouchableOpacity>
 
-                    <Pressable style = {styles.modalButton}>
+                    <TouchableOpacity style = {styles.modalButton}>
                     <Text>Reset FILTER</Text>
-                    </Pressable>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
