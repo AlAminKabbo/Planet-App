@@ -119,7 +119,7 @@ export const PLANET_LIST = [
 const  FilterModal = ({ visible, colseModal }) => {
     const { height, width } = useWindowDimensions();
     const [rotationTime, setRotationTime] = useState([0,500])
-    const [radius, setRadius] = useState([5000,1500])
+    const [radius, setRadius] = useState([5000,15000])
     
     return(
     <Modal 
@@ -129,9 +129,7 @@ const  FilterModal = ({ visible, colseModal }) => {
     onBackdropPress = {colseModal}
     >
     
-        <View
-        style = {{ backgroundColor: colors.darkGrey, height: height/2, borderRadius: 30, margin: spacing[2]}}
-        >
+        <View style = {{ backgroundColor: colors.darkGrey, height: height/2, borderRadius: 30, margin: spacing[2]}}>
             <TouchableOpacity onPressIn = {colseModal}>
             <View style = {styles.cross}>
                 <Entypo name="circle-with-cross" size={24} color={colors.white}/> 
@@ -173,14 +171,16 @@ const  FilterModal = ({ visible, colseModal }) => {
                     max={15000}
                     containerStyle={{marginLeft: spacing[2]}}
                 />
-                <View>
+                <View style={{ flex:1, justifyContent: 'flex-end',margin: spacing[2]}}>
+                <View style={{flexDirection: "row"}}>
                     <TouchableOpacity style = {styles.modalButton}>
-                    <Text>FILTER</Text>
+                    <Text style={styles.buttonText}>FILTER</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style = {styles.modalButton}>
-                    <Text>Reset FILTER</Text>
+                    <Text style={styles.buttonText}>RESET FILTER</Text>
                     </TouchableOpacity>
+                </View>
                 </View>
             </View>
         </View>
@@ -302,9 +302,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         marginRight: spacing[2],
-        borderRadius: spacing[4],
-        paddingVertical: spacing[5],
+        borderRadius: spacing[3],
+        paddingVertical: spacing[3],
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    buttonText:{
+        color: colors.black,
+        fontWeight: 'bold',
     }
+
 })
