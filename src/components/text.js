@@ -11,4 +11,4 @@ const Text = ({children, preset = 'default', style}) => {
     )
 }
 
-export default Text
+export default Text;

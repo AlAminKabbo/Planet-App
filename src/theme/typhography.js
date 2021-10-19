@@ -1,5 +1,5 @@
  export const typhography = {
-     primary: 'Spartn-Regular',
+     primary: 'Spartan-Regular',
      primaryBold: 'Spartan-Bold',
      bold: 'Antonio-Medium',
  }

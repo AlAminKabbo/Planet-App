@@ -5,7 +5,9 @@ import  Text from '../components/text';
 import { colors, spacing } from '../theme';
 import PlanetHeader from './planet-header';
 import { AntDesign } from '@expo/vector-icons';
-import Modal from 'react-native-modal'
+import Modal from 'react-native-modal';
+import { Entypo } from '@expo/vector-icons';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 export const PLANET_LIST = [
     {
@@ -115,8 +117,10 @@ export const PLANET_LIST = [
     ];
 
 const  FilterModal = ({ visible, colseModal }) => {
-const { height, width } = useWindowDimensions();
-
+    const { height, width } = useWindowDimensions();
+    const [rotationTime, setRotationTime] = useState([0,500])
+    const [radius, setRadius] = useState([5000,1500])
+    
     return(
     <Modal 
     isVisible ={visible}
@@ -125,12 +129,61 @@ const { height, width } = useWindowDimensions();
     onBackdropPress = {colseModal}
     >
     
-    <View
-     style = {{ backgroundColor: colors.darkGrey, height: height/2, borderRadius: 30, margin: spacing[2]}}
-    >
+        <View
+        style = {{ backgroundColor: colors.darkGrey, height: height/2, borderRadius: 30, margin: spacing[2]}}
+        >
+            <TouchableOpacity onPressIn = {colseModal}>
+            <View style = {styles.cross}>
+                <Entypo name="circle-with-cross" size={24} color={colors.white}/> 
+            </View>
+            </TouchableOpacity>
+            
+            <View style = {{margin: spacing[2]}}>
+                <Text preset="h2"> 
+                    Filter
+                </Text>
+                <View>
+                <Text>Filter by Rotation time</Text>
+                <Text preset='h4'>
+                    {`Rotation Time ${rotationTime[0]} - ${rotationTime[1]}`}
+                </Text>
+                </View>
 
-    </View>
+                <MultiSlider
+                    values={rotationTime}
+                    onValueChange={(values) => setRotationTime(values)}
+                    step={10}
+                    min={0}
+                    max={500}
+                    containerStyle={{marginLeft: spacing[2]}}
+                />
+            
+            <View>
+                <Text>Filter by Radius</Text>
+                <Text preset='h4'>
+                    {`Radius: ${radius[0]} - ${radius[1]}`}
+                </Text>
+                </View>
 
+                <MultiSlider
+                    values={radius}
+                    onValueChange={(values) => setRadius(values)}
+                    step={100}
+                    min={5000}
+                    max={15000}
+                    containerStyle={{marginLeft: spacing[2]}}
+                />
+                <View style={{flexBasis: "row"}}>
+                    <Pressable style = {styles.modalButton}>
+                    <Text>FILTER</Text>
+                    </Pressable>
+
+                    <Pressable style = {styles.modalButton}>
+                    <Text>Reset FILTER</Text>
+                    </Pressable>
+                </View>
+            </View>
+        </View>
     </Modal>
     )
 }
@@ -241,4 +294,17 @@ const styles = StyleSheet.create({
         alignSelf: "flex-end",
         padding: spacing[3],
     },
+    cross:{
+        alignItems: 'flex-end',
+        padding: 15,
+    },
+    modalButton:{
+        flex: 1,
+        backgroundColor: 'white',
+        marginRight: spacing[2],
+        borderRadius: spacing[4],
+        paddingVertical: spacing[5],
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 })
